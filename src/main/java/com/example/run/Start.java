@@ -1,10 +1,11 @@
-package com.run;
+package com.example.run;
 
-import com.controller.StaticNameController;
+import com.example.controller.StaticNameController;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.boot.SpringApplication;
 
-@SpringApplication
+@SpringBootApplication
 public class Start {
 
     @Bean
@@ -13,6 +14,7 @@ public class Start {
     }
 
     public void main(String[] args) {
-
+        // Launch the application
+        SpringApplication.run(Start.class, args);
     }
 }
