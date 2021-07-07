@@ -13,7 +13,7 @@ public class Start {
         return new StaticNameController();
     }
 
-    public void main(String[] args) {
+    public static void main(String[] args) {
         // Launch the application
         SpringApplication.run(Start.class, args);
     }
