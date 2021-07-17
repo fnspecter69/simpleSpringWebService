@@ -20,13 +20,16 @@ public class Start {
         SpringApplication.run(Start.class, args);
     }
 
+    /*
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/name-javaconfig").allowedOrigins("http://localhost:8080");
+                registry.addMapping("/name")
+                        .allowedMethods("*")
+                        .allowedOrigins("http://localhost:8080");
             }
         };
-    }
+    }*/
 }
