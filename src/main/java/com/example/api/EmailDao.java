@@ -10,4 +10,6 @@ public interface EmailDao {
     public List<Email> getBySender(String sender);
 
     public Email updateEmail(Email email);
+
+    public Email deleteEmail(Email email);
 }
