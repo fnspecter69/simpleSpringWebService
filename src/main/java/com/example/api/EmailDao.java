@@ -11,5 +11,5 @@ public interface EmailDao {
 
     public Email updateEmail(Email email);
 
-    public Email deleteEmail(Email email);
+    public Email deleteEmail(String id);
 }
