@@ -37,7 +37,11 @@ public class EmailController {
         return emailDao.getBySender(sender);
     }
 
-    public Email deleteEmail(@RequestParam String id) { return null; }
+    @RequestMapping(method = RequestMethod.DELETE, value = "/email/delete/{id}")
+    @ResponseBody
+    public Email deleteEmail(@RequestParam String id) { return emailDao.deleteEmail(id); }
 
-    public Email updateEmail(Email email) { return null; }
+    @RequestMapping(method = RequestMethod.PUT, value = "/email/update")
+    @ResponseBody
+    public Email updateEmail(@RequestBody Email email) { return emailDao.updateEmail(email); }
 }
