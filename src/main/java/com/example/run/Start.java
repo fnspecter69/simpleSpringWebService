@@ -1,5 +1,6 @@
 package com.example.run;
 
+import com.example.api.EmailDao;
 import com.example.dao.MongoEmailDao;
 import com.example.controller.EmailController;
 import com.example.controller.StaticNameController;
@@ -30,6 +31,16 @@ public class Start {
     @Bean
     public MongoTemplate mongoTemplate() throws Exception {
         return new MongoTemplate(mongoClient(), "test");
+    }
+
+    @Bean
+    public EmailDao emailDao(MongoTemplate mongoTemplate) {
+        return new MongoEmailDao(mongoTemplate);
+    }
+
+    @Bean
+    public EmailController emailController(EmailDao emailDao) {
+        return new EmailController(emailDao);
     }
 
     @Bean
