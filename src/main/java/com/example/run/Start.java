@@ -1,14 +1,36 @@
 package com.example.run;
 
+import com.example.dao.MongoEmailDao;
+import com.example.controller.EmailController;
 import com.example.controller.StaticNameController;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.ConnectionString;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.boot.SpringApplication;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 public class Start {
+
+    @Bean
+    public MongoClient mongoClient() {
+        ConnectionString connectionString = new ConnectionString("mongodb://localhost:27017/test");
+        MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
+                .applyConnectionString(connectionString)
+                .build();
+
+        return MongoClients.create(mongoClientSettings);
+    }
+
+    @Bean
+    public MongoTemplate mongoTemplate() throws Exception {
+        return new MongoTemplate(mongoClient(), "test");
+    }
 
     @Bean
     public StaticNameController staticNameController() {
