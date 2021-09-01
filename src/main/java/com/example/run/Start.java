@@ -1,5 +1,6 @@
 package com.example.run;
 
+import com.example.api.Email;
 import com.example.api.EmailDao;
 import com.example.dao.MongoEmailDao;
 import com.example.controller.EmailController;
@@ -20,7 +21,7 @@ public class Start {
 
     @Bean
     public MongoClient mongoClient() {
-        ConnectionString connectionString = new ConnectionString("mongodb://localhost:27017/test");
+        ConnectionString connectionString = new ConnectionString("mongodb://localhost:27017/email");
         MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
                 .applyConnectionString(connectionString)
                 .build();
@@ -30,7 +31,7 @@ public class Start {
 
     @Bean
     public MongoTemplate mongoTemplate() throws Exception {
-        return new MongoTemplate(mongoClient(), "test");
+        return new MongoTemplate(mongoClient(), "email");
     }
 
     @Bean
@@ -51,6 +52,7 @@ public class Start {
     public static void main(String[] args) {
         // Launch the application
         SpringApplication.run(Start.class, args);
+        Email email = new Email("ted", "today to make cookie", "sam");
     }
 
     /*

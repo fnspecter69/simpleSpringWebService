@@ -1,13 +1,14 @@
 package com.example.api;
 
 import java.util.Date;
+import org.springframework.data.annotation.Id;
 /**
  *  Email
  *
  */
 public class Email {
 
-    private String id;
+    @Id private String id;
     private String to;
     private String body;
     private String from;
