@@ -38,16 +38,15 @@ public class MongoEmailDao implements EmailDao {
 
     @Override
     public Email getById(String id) {
+        System.out.println("dao id is " + id);
         Query query = new Query();
         query.addCriteria(Criteria.where("id").is(id));
         return mongoTemplate.findById(query, Email.class);
     }
 
     @Override
-    public List<Email> getBySender(String sender) {
-        Query query = new Query();
-        query.addCriteria(Criteria.where("sender").is(sender));
-        return mongoTemplate.find(query, Email.class);
+    public List<Email> getAllEmails() {
+        return mongoTemplate.findAll(Email.class);
     }
 
     @Override

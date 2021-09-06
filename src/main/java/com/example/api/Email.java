@@ -19,6 +19,7 @@ public class Email {
         this.to = "";
         this.body = "";
         this.from = "";
+        this.date = new Date();
     }
 
     public String getBody() {
@@ -37,6 +38,7 @@ public class Email {
         this.to = to;
         this.body = body;
         this.from = from;
+        this.date = new Date();
     }
 
     public String getId() { return id; }

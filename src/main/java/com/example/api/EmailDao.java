@@ -7,7 +7,7 @@ public interface EmailDao {
 
     public Email getById(String id);
 
-    public List<Email> getBySender(String sender);
+    public List<Email> getAllEmails();
 
     public Email updateEmail(Email email);
 

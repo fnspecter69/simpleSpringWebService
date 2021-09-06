@@ -5,15 +5,10 @@ import com.example.api.EmailDao;
 
 import java.util.List;
 import java.util.Optional;
-import org.springframework.web.bind.annotation.CrossOrigin;
+
+import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -24,16 +19,19 @@ public class EmailController {
         this.emailDao = emailDao;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/email/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/email/{id}/")
     @ResponseBody
-    public ResponseEntity<Email> getEmailById(@RequestParam String id) {
-        Optional<Email> email = Optional.of(this.emailDao.getById(id));
+    public ResponseEntity<Email> getEmailById(@PathVariable String id) {
+        System.out.println("id is " + id);
+        Email email = this.emailDao.getById(id);
+        System.out.println("the email is");
+        System.out.print(email);
 
-        if (!email.isPresent()) {
+        if (email != null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<Email>(email.get(), HttpStatus.FOUND);
+        return new ResponseEntity<Email>(email, HttpStatus.FOUND);
 
     }
 
@@ -43,10 +41,10 @@ public class EmailController {
         return new ResponseEntity<Email>(this.emailDao.insertEmail(email), HttpStatus.CREATED);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/emails/{sender}")
+    @RequestMapping(method = RequestMethod.GET, value = "/emails")
     @ResponseBody
-    public ResponseEntity<List<Email>> getEmailsBySender(@RequestParam String sender) {
-        Optional<List<Email>> emails = Optional.of(emailDao.getBySender(sender));
+    public ResponseEntity<List<Email>> getEmailsBySender() {
+        Optional<List<Email>> emails = Optional.of(emailDao.getAllEmails());
         if (!emails.isPresent()) {
             return new ResponseEntity<List<Email>>(HttpStatus.NOT_FOUND);
         }
