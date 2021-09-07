@@ -19,19 +19,16 @@ public class EmailController {
         this.emailDao = emailDao;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/email/{id}/")
+    @RequestMapping(method = RequestMethod.GET, value = "/email/{id}")
     @ResponseBody
-    public ResponseEntity<Email> getEmailById(@PathVariable String id) {
-        System.out.println("id is " + id);
-        Email email = this.emailDao.getById(id);
-        System.out.println("the email is");
-        System.out.print(email);
+    public ResponseEntity<Email> getEmailById(@PathVariable (required = true) String id) {
+        Optional<Email> email = Optional.of(this.emailDao.getById(id));
 
-        if (email != null) {
+        if (!email.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<Email>(email, HttpStatus.FOUND);
+        return new ResponseEntity<Email>(email.get(), HttpStatus.FOUND);
 
     }
 
@@ -53,7 +50,7 @@ public class EmailController {
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/email/delete/{id}")
     @ResponseBody
-    public ResponseEntity<Email> deleteEmail(@RequestParam String id) {
+    public ResponseEntity<Email> deleteEmail(@PathVariable (required = true) String id) {
         Optional<Email> deletedEmail = Optional.of(emailDao.deleteEmail(id));
 
         if (!deletedEmail.isPresent()) {

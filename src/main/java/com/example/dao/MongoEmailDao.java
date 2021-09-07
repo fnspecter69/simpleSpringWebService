@@ -5,6 +5,7 @@ import com.example.api.EmailDao;
 import com.mongodb.client.result.UpdateResult;
 import java.util.List;
 import java.util.UUID;
+import javax.validation.constraints.NotNull;
 
 
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -37,11 +38,8 @@ public class MongoEmailDao implements EmailDao {
     }
 
     @Override
-    public Email getById(String id) {
-        System.out.println("dao id is " + id);
-        Query query = new Query();
-        query.addCriteria(Criteria.where("id").is(id));
-        return mongoTemplate.findById(query, Email.class);
+    public Email getById(@NotNull String id) {
+        return mongoTemplate.findById(id, Email.class);
     }
 
     @Override
@@ -64,7 +62,7 @@ public class MongoEmailDao implements EmailDao {
     }
 
     @Override
-    public Email deleteEmail(String id) {
+    public Email deleteEmail(@NotNull String id) {
         Query query = new Query();
         query.addCriteria(Criteria.where("id").is(id));
         return mongoTemplate.findAndRemove(query, Email.class);
