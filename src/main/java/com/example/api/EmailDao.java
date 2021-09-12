@@ -9,7 +9,7 @@ public interface EmailDao {
 
     public List<Email> getAllEmails();
 
-    public Email updateEmail(Email email);
+    public Email updateEmail(String id, Email email);
 
     public Email deleteEmail(String id);
 }

@@ -48,12 +48,16 @@ public class MongoEmailDao implements EmailDao {
     }
 
     @Override
-    public Email updateEmail(Email email) {
+    public Email updateEmail(String id, Email email) {
         Query query = new Query();
-        query.addCriteria(Criteria.where("id").is(email.getId()));
-
+        query.addCriteria(Criteria.where("id").is(id));
+        if (!this.mongoTemplate.exists(query, Email.class)) {
+            return email;
+        }
         Update update = new Update();
-        update.set("email", email);
+        update.set("body", email.getBody());
+        update.set("to", email.getTo());
+        update.set("from", email.getFrom());
         UpdateResult updateResult = this.mongoTemplate.upsert(query, update, Email.class);
         if (updateResult.getModifiedCount() == 0) {
             return null;

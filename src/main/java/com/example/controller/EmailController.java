@@ -59,10 +59,10 @@ public class EmailController {
         return new ResponseEntity<Email>(deletedEmail.get(), HttpStatus.FOUND);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/email/update")
+    @RequestMapping(method = RequestMethod.PUT, value = "/email/update/{id}")
     @ResponseBody
-    public ResponseEntity<Email> updateEmail(@RequestBody Email email) {
-        Optional updateEmail = Optional.of(emailDao.updateEmail(email));
+    public ResponseEntity<Email> updateEmail(@RequestBody Email email, @PathVariable String id) {
+        Optional updateEmail = Optional.of(emailDao.updateEmail(id, email));
 
         if (!updateEmail.isPresent()) {
             return new ResponseEntity<Email>(HttpStatus.NOT_FOUND);
