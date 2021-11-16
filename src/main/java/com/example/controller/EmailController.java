@@ -44,6 +44,8 @@ public class EmailController {
         Optional<List<Email>> emails = Optional.of(emailDao.getAllEmails());
         if (!emails.isPresent()) {
             return new ResponseEntity<List<Email>>(HttpStatus.NOT_FOUND);
+        } else if (emails.isPresent() && emails.get().isEmpty()) {
+            return new ResponseEntity<List<Email>>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<List<Email>>(emails.get(), HttpStatus.FOUND);
     }
