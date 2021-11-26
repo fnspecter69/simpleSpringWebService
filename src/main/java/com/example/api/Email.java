@@ -14,11 +14,22 @@ public class Email {
     private String from;
     private Date date;
 
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    private String subject;
+
     public Email() {
         this.id = "";
         this.to = "";
         this.body = "";
         this.from = "";
+        this.subject = "";
         this.date = new Date();
     }
 
@@ -34,11 +45,12 @@ public class Email {
         return to;
     }
 
-    public Email(String to, String body, String from){
+    public Email(String to, String body, String from, String subject){
         this.to = to;
         this.body = body;
         this.from = from;
         this.date = new Date();
+        this.subject = subject;
     }
 
     public String getId() { return id; }

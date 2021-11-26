@@ -52,7 +52,7 @@ public class Start {
     public static void main(String[] args) {
         // Launch the application
         SpringApplication.run(Start.class, args);
-        Email email = new Email("ted", "today to make cookie", "sam");
+        Email email = new Email("ted", "today to make cookie", "sam", "New Deal");
     }
 
     /*
