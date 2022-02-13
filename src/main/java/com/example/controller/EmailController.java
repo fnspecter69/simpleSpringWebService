@@ -63,7 +63,7 @@ public class EmailController {
 
     @RequestMapping(method = RequestMethod.PUT, value = "/email/update/{id}")
     @ResponseBody
-    public ResponseEntity<Email> updateEmail(@RequestBody Email email, @PathVariable String id) {
+    public ResponseEntity<Email> updateEmail(@RequestBody Email email, @PathVariable (required = true) String id) {
         Optional updateEmail = Optional.of(emailDao.updateEmail(id, email));
 
         if (!updateEmail.isPresent()) {
